@@ -1,118 +1,130 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 :root {
-  --Azure: #2994cb;
-  --Absinthe: #a3de9e;
-  --Sky: #394b59;
-  --Anthracite: #2a2a2a;
-  --Jet: #141414;
-  --Night: #181818;
-  --Stone: #6c757d;
-  --Zinc: #cfd2d0;
-  --Absinthe-alpha: rgba(163, 222, 158, 0.8);
-  --Shadow-Alpha: rgba(0, 0, 0, 0.5);
+    --Azure: #2994cb;
+    --Absinthe: #a3de9e;
+    --Sky: #394b59;
+    --Anthracite: #2a2a2a;
+    --Jet: #141414;
+    --Night: #181818;
+    --Stone: #6c757d;
+    --Zinc: #cfd2d0;
+    --Absinthe-alpha: rgba(163, 222, 158, 0.8);
+    --Shadow-Alpha: rgba(0, 0, 0, 0.5);
 }
 
 html,
 body,
 .wrapper {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  background-color: var(--Night);
+    background-color: var(--Night);
 }
 
 .wrapper {
-  padding-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 header {
-  font-family: "Aldrich", sans-serif;
-  text-align: center;
-  padding: 20px;
-  padding-top: 0px;
-  color: var(--Azure);
+    font-family: "Aldrich", sans-serif;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 900px;
+    padding-top: 0px;
+    color: var(--Azure);
 }
 
 .card {
-  font-family: "Play", sans-serif;
-  background-color: var(--Anthracite);
-  border-radius: 5px;
-  border-width: 1px;
-  box-shadow: var(--Shadow-Alpha);
-  color: var(--Absinthe);
-  font-size: 18px;
-  margin: 0 auto;
-  max-width: 900px;
-  padding: 30px 40px;
+    font-family: "Play", sans-serif;
+    background-color: var(--Anthracite);
+    border-radius: 5px;
+    border-width: 1px;
+    box-shadow: var(--Shadow-Alpha);
+    color: var(--Absinthe);
+    font-size: 18px;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 30px 40px;
 }
 
 .card-header::after {
-  content: " ";
-  display: block;
-  width: 100%;
-  background: var(--Absinthe);
-  height: 2px;
+    content: " ";
+    display: block;
+    width: 100%;
+    background: var(--Absinthe);
+    height: 2px;
 }
 
 .card-body {
-  min-height: 500px;
+    min-height: 500px;
 }
 
 .card-footer {
-  text-align: center;
+    text-align: center;
 }
 
 .card-footer::before {
-  content: " ";
-  display: block;
-  width: 100%;
-  background: var(--Absinthe);
-  height: 2px;
+    content: " ";
+    display: block;
+    width: 100%;
+    background: var(--Absinthe);
+    height: 2px;
 }
 
 .card-footer::after {
-  content: " ";
-  display: block;
-  clear: both;
+    content: " ";
+    display: block;
+    clear: both;
 }
 
 .btn {
-  font-family: "Play", sans-serif;
-  border: none;
-  background-color: var(--Azure);
-  border-radius: 25px;
-  box-shadow: var(--Shadow-Alpha);
-  color: var(--Jet);
-  display: inline-block;
-  font-size: 22px;
-  line-height: 22px;
-  margin: 16px 16px 16px 20px;
-  padding: 14px 34px;
-  text-align: center;
-  cursor: pointer;
+    font-family: "Play", sans-serif;
+    border: none;
+    background-color: var(--Azure);
+    border-radius: 25px;
+    box-shadow: var(--Shadow-Alpha);
+    color: var(--Jet);
+    display: inline-block;
+    font-size: 22px;
+    line-height: 22px;
+    margin: 16px 16px 16px 20px;
+    padding: 14px 34px;
+    text-align: center;
+    cursor: pointer;
 }
 
 button[disabled] {
-  cursor: default;
-  background: var(--Stone);
-}
-
-.float-right {
-  float: right;
+    cursor: default;
+    background: var(--Stone);
 }
 
 .float-left {
+    display: inline-block;
     float: left;
+}
+
+.float-center {
+    display: inline-block;
+    float: center;
+}
+
+.float-right {
+    display: inline-block;
+    float: right;
+}
+
+.zinc {
+    color: var(--Zinc);
 }
 
 .begin {
@@ -122,44 +134,44 @@ button[disabled] {
 }
 
 #Answer {
-  font-family: "Orbitron", sans-serif;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  color: var(--Absinthe);
-  background-color: var(--Anthracite);
-  border: none;
-  display: block;
-  width: 100%;
-  min-height: 490px;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 85px;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px solid var(--Azure);
-  border-radius: 6px;
-  resize: none;
-  overflow: hidden;
+    font-family: "Orbitron", sans-serif;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color: var(--Absinthe);
+    background-color: var(--Anthracite);
+    border: none;
+    display: block;
+    width: 100%;
+    min-height: 490px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 85px;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid var(--Azure);
+    border-radius: 6px;
+    resize: none;
+    overflow: hidden;
 }
 
 @media (max-width: 690px) {
-  .btn {
-    font-size: 1rem;
-    margin: 16px 0px 0px 0px;
-    padding: 10px 15px;
-  }
+    .btn {
+        font-size: 1rem;
+        margin: 16px 0px 0px 0px;
+        padding: 10px 15px;
+    }
 
-  #Answer {
-    font-size: 1rem;
-  }
+    #Answer {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 500px) {
-  .btn {
-    font-size: 0.8rem;
-  }
+    .btn {
+        font-size: 0.8rem;
+    }
 }
