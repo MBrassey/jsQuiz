@@ -127,6 +127,10 @@ button[disabled] {
     color: var(--Zinc);
 }
 
+.azure {
+    color: var(--Azure);
+}
+
 .begin {
     color: var(--Zinc);
     display: block;
