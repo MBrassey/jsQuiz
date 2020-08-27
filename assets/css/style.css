@@ -131,16 +131,22 @@ button[disabled] {
     color: var(--Azure);
 }
 
+.answerText {
+    display: flex;
+    align-items: left;
+    cursor: pointer;
+}
+
+.answerText:hover {
+    color: var(--Azure);
+}
+
 #begin {
     color: var(--Zinc);
     display: block;
     padding: 1vw 1vw 1vw 1vw;
     margin: 20.3% 12% 12% 12%;
     cursor:pointer;
-}
-
-#questionLine {
-
 }
 
 #answer {

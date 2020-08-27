@@ -11,6 +11,16 @@ document.write(obj.q1a4 + "</br>");
 
 var startQuiz = function () {
     console.log("Starting Quiz");
+    var Question = document.getElementById("questionLine");
+    var Answer = document.getElementById("answer");
+    var answerEl = document.createElement("div");
+
+    // Load Answers
+    Answer.innerHTML = "";
+    answerEl.className = "answerList";
+    answerEl.innerHTML = "<h3 class='answerText'>" + obj.q1a1 + "</h3><h3 class='answerText'>" + obj.q1a2 + "</h3><h3 class='answerText'>" + obj.q1a3 + "</h3><h3 class='answerText'>" + obj.q1a4 + "</h3>";
+    document.getElementById('answer').appendChild(answerEl);  
+//    element.innerHTML = "pikapika??";
 }
 
 var clickHandler = function (event) {
@@ -20,11 +30,11 @@ var clickHandler = function (event) {
     console.log(targetEl);
 
     // Start Area Was Clicked
-    if (targetEl === begin) {
+    if (targetEl.matches("#begin")) {
         console.log("Start was clicked.");
         startQuiz();
 
-    } else if (targetEl === answer) {
+    } else if (targetEl.matches("#answer")) {
         console.log("Answer was clicked.");
     }
 };
