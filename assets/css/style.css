@@ -179,19 +179,17 @@ button[disabled] {
 }
 
 @media (max-width: 690px) {
-    .btn {
-        font-size: 1rem;
-        margin: 16px 0px 0px 0px;
-        padding: 10px 15px;
-    }
-
-    #Answer {
-        font-size: 1rem;
+    #questionLine {
+        text-align: center;
     }
 }
 
 @media (max-width: 500px) {
-    .btn {
-        font-size: 0.8rem;
+    .card-header {
+        font-size: 1rem;
+    }
+
+    .answerList {
+        font-size: 1rem;
     }
 }
