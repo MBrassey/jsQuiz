@@ -149,6 +149,10 @@ button[disabled] {
     cursor:pointer;
 }
 
+#begin:hover {
+    color: var(--Azure);
+}
+
 #answer {
     font-family: "Orbitron", sans-serif;
     -webkit-appearance: none;
