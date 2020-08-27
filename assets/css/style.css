@@ -131,13 +131,19 @@ button[disabled] {
     color: var(--Azure);
 }
 
-.begin {
+#begin {
     color: var(--Zinc);
     display: block;
-    padding-top: 8vw;
+    padding: 1vw 1vw 1vw 1vw;
+    margin: 20.3% 12% 12% 12%;
+    cursor:pointer;
 }
 
-#Answer {
+#questionLine {
+
+}
+
+#answer {
     font-family: "Orbitron", sans-serif;
     -webkit-appearance: none;
     -moz-appearance: none;
