@@ -1,9 +1,14 @@
+// Define The Vars
 var answerContentEl = document.querySelector("#answer");
 var timerEl = document.getElementById("time");
+var Question = document.getElementById("questionLine");
+var Answer = document.getElementById("answer");
+var answerEl = document.createElement("div");
 var timeRemaining = 30;
 var score = 0;
 var expired = false;
 var questionNumber = 0;
+var highScore = 0;
 
 // Questions Array
 var questions = [
@@ -33,7 +38,10 @@ var countdown = function () {
             clearInterval(timer);
             timeRemaining = 0;
             var expired = true;
-            alert("end");
+            alert("countdown ended");
+        }
+        else if (questionNumber > questions.length) {
+            clearInterval(timer);
         }
     }, 1000);
 };
@@ -42,11 +50,7 @@ var countdown = function () {
 var load = function (questionNumber) {
     // Reset Timer
     timeRemaining = 30;
-
     console.log("Question: " + questionNumber);
-    var Question = document.getElementById("questionLine");
-    var Answer = document.getElementById("answer");
-    var answerEl = document.createElement("div");
 
     // Load Questions
     Question.innerHTML = "";
@@ -75,8 +79,8 @@ var load = function (questionNumber) {
     console.log("Correct Answer: " + correctAnswer);
 };
 
+// Click Handler
 var clickHandler = function (event) {
-
     // event.preventDefault();
     var targetEl = event.target;
     console.log(targetEl);
@@ -102,18 +106,43 @@ var clickHandler = function (event) {
             console.log("New Score: " + score);
         }
         // Increment Question Number
-        questionNumber = (questionNumber + 1);
+        questionNumber = questionNumber + 1;
         // To The Next Step
-        quiz();
+        if (questionNumber < questions.length) {
+            quiz();
+        } else {
+            reset();
+            end();
+        }
     }
 };
 
+// Initial Function
 var initial = function () {
     var Length = document.getElementById("length");
     Length.innerHTML = "";
     Length.innerHTML = questions.length;
 };
 
+// End Quiz
+var end = function () {
+    questionNumber = 0;
+    Question.innerHTML = "";
+    Question.innerHTML = "<h2>Current high score: <span class='azure' id='length'>" + highScore + "</span>, you'r score: <span class='azure'>" + score + "</span>.</h2>";
+    Answer.innerHTML = "";
+    Answer.innerHTML = "<h1 id='high'>MLAB | " + score + "</h1>";
+    alert("END, Your Score: " + score);
+}
+
+// Reset Quiz
+var reset = function () {
+    Question.innerHTML = "";
+    Question.innerHTML = "<h2>This quiz has <span class='azure' id='length'>" + questions.length + "</span> questions, you have <span class='azure'>30s</span> to answer each.</h2>";
+    Answer.innerHTML = "";
+    Answer.innerHTML = "<h1 id='begin'>Click to begin quiz!</h1>";
+};
+
+// Quiz Function
 var quiz = function () {
     console.log("qnumber " + questionNumber);
     if (questionNumber <= questions.length) {
@@ -121,6 +150,8 @@ var quiz = function () {
     }
 };
 
+// Listen For Clicks Within The Answer Div
 answerContentEl.addEventListener("click", clickHandler);
 
+// Update Initial App Appearance
 initial();

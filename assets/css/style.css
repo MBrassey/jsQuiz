@@ -146,7 +146,15 @@ button[disabled] {
     display: block;
     padding: 1vw 1vw 1vw 1vw;
     margin: 20.3% 12% 12% 12%;
-    cursor:pointer;
+    cursor: pointer;
+}
+
+#high {
+    color: var(--Zinc);
+    display: block;
+    padding: 1vw 1vw 1vw 1vw;
+    margin: 20.3% 12% 12% 12%;
+    font-size: 4rem;
 }
 
 #begin:hover {
@@ -191,5 +199,9 @@ button[disabled] {
 
     .answerList {
         font-size: 1rem;
+    }
+
+    #high {
+        font-size: 1.5rem;
     }
 }
