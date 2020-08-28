@@ -1,6 +1,5 @@
-// Initial Click Area
 var answerContentEl = document.querySelector("#answer");
-var timerEl = document.getElementById("time")
+var timerEl = document.getElementById("time");
 var timeRemaining = 30;
 var score = 0;
 var expired = false;
@@ -25,62 +24,84 @@ var answers = [
 ];
 
 // Countdown Timer
-var countdown = function() {
+var countdown = function () {
     console.log("countdown!");
-    var timer = setInterval(function(){
+    var timer = setInterval(function () {
         timeRemaining = timeRemaining - 1;
         timerEl.textContent = timeRemaining;
-        if(timeRemaining <= 0) {
+        if (timeRemaining <= 0) {
             clearInterval(timer);
             timeRemaining = 0;
             var expired = true;
             alert("end");
         }
     }, 1000);
-}  
+};
 
+// Load Question & Answers
 var load = function (questionNumber) {
-        console.log("Question: " + questionNumber);
-        var Question = document.getElementById("questionLine");
-        var Answer = document.getElementById("answer");
-        var answerEl = document.createElement("div");
-    
-        // Load Questions
-        Question.innerHTML = "";
-        Question.innerHTML = "<h2>" + questions[questionNumber].q + "</h2>";
-    
-        // Load Answers
-        Answer.innerHTML = "";
-        answerEl.className = "answerList";
-        answerEl.innerHTML = "<h3 class='answerText' id='a1'>" + answers[questionNumber].a1 + "</h3>" + "<h3 class='answerText' id='a2'>" + answers[questionNumber].a2 + "</h3>" + "<h3 class='answerText' id='a3'>" + answers[questionNumber].a3 + "</h3>" + "<h3 class='answerText' id='a4'>" + answers[questionNumber].a4 + "</h3>";
-        Answer.appendChild(answerEl);
+    console.log("Question: " + questionNumber);
+    var Question = document.getElementById("questionLine");
+    var Answer = document.getElementById("answer");
+    var answerEl = document.createElement("div");
 
-        // Increment Question Number
-        questionNumber = questionNumber + 1;
-        console.log(questionNumber);
+    // Load Questions
+    Question.innerHTML = "";
+    Question.innerHTML = "<h2>" + questions[questionNumber].q + "</h2>";
 
-        // Broadcast Correct Answer
-        correctAnswer = questions[questionNumber].ca;
-        console.log("Correct Answer: " + correctAnswer);
-      };
+    // Load Answers
+    Answer.innerHTML = "";
+    answerEl.className = "answerList";
+    answerEl.innerHTML =
+        "<h3 class='answerText' id='a1'>" +
+        answers[questionNumber].a1 +
+        "</h3>" +
+        "<h3 class='answerText' id='a2'>" +
+        answers[questionNumber].a2 +
+        "</h3>" +
+        "<h3 class='answerText' id='a3'>" +
+        answers[questionNumber].a3 +
+        "</h3>" +
+        "<h3 class='answerText' id='a4'>" +
+        answers[questionNumber].a4 +
+        "</h3>";
+    Answer.appendChild(answerEl);
 
+    // Start Timer
+    countdown();
+
+    // Broadcast Correct Answer
+    correctAnswer = questions[questionNumber].ca;
+    console.log("Correct Answer: " + correctAnswer);
+};
 
 var clickHandler = function (event) {
+
     // event.preventDefault();
-    // get target element from event
     var targetEl = event.target;
     console.log(targetEl);
 
-    if (targetEl.matches("#begin")) {   // Start Button Clicked
+    if (targetEl.matches("#begin")) {
+        // Start Button Clicked
         console.log("Start was clicked.");
         quiz();
-    } else if (targetEl.matches("#answer")) {   // Outside Content Window Clicked
+    } else if (targetEl.matches("#answer")) {
+        // Outside Content Window Clicked
         console.log("Outside was clicked.");
-    } else if (targetEl.matches(".answerText")) {   // An Answer Clicked
+    } else if (targetEl.matches(".answerText")) {
+        // An Answer Clicked
         console.log("A selection has been made. " + event.target.id);
         if (event.target.id === correctAnswer) {
+            // The Correct Answer Clicked
             console.log("Holy Shit, The Correct Answer Was Clicked..");
+            // Add Current Time Remaining To Score As Points
+            score = score + timeRemaining;
+            console.log("New Score: " + score);
         }
+        // Increment Question Number
+        questionNumber = (questionNumber + 1);
+        // To The Next Step
+        quiz();
     }
 };
 
@@ -91,12 +112,11 @@ var initial = function () {
 };
 
 var quiz = function () {
+    console.log("qnumber " + questionNumber);
     if (questionNumber <= questions.length) {
-        countdown();
         load(questionNumber);
-
     }
-}
+};
 
 answerContentEl.addEventListener("click", clickHandler);
 
