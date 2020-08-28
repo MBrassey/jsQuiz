@@ -4,6 +4,7 @@ var timerEl = document.getElementById("time")
 var timeLeft = 30;
 var score = 0;
 var expired = false;
+var questionNumber = 0;
 
 // Questions Array
 var questions = [
@@ -38,10 +39,8 @@ var countdown = function() {
     }, 1000);
 }  
 
-var startQuiz = function () {
-      // Loop over every question object
-      for (var i = 0; i < questions.length; i++) {
-        console.log("Question: " + i);
+var load = function (questionNumber) {
+        console.log("Question: questionNumber");
         var Question = document.getElementById("questionLine");
         var Answer = document.getElementById("answer");
         var Time = document.getElementById("timer");
@@ -50,27 +49,16 @@ var startQuiz = function () {
     
         // Load Questions
         Question.innerHTML = "";
-        Question.innerHTML = "<h2>" + questions[i].q + "</h2>";
+        Question.innerHTML = "<h2>" + questions[questionNumber].q + "</h2>";
     
         // Load Answers
         Answer.innerHTML = "";
         answerEl.className = "answerList";
-        answerEl.innerHTML = "<h3 class='answerText' id='answers[i].a1'>" + answers[i].a1 + "</h3>" + "<h3 class='answerText' id='answers[i].a2'>" + answers[i].a2 + "</h3>" + "<h3 class='answerText' id='answers[i].a3'>" + answers[i].a3 + "</h3>" + "<h3 class='answerText' id='answers[i].a4'>" + answers[i].a4 + "</h3>";
+        answerEl.innerHTML = "<h3 class='answerText'>" + answers[questionNumber].a1 + "</h3>" + "<h3 class='answerText'>" + answers[questionNumber].a2 + "</h3>" + "<h3 class='answerText'>" + answers[questionNumber].a3 + "</h3>" + "<h3 class='answerText'>" + answers[questionNumber].a4 + "</h3>";
         Answer.appendChild(answerEl);
-        confirm("test");
-        // Compare answers
-        if (
-          ((answer === true && questions[i].a === 't') ||
-          (answer === false && questions[i].a === 'f'))
-        ) {
-          // Increase score
-          score++;
-          alert('Correct!');
-        } else {
-          alert('Wrong!');
-        }
-      }
-};
+
+      };
+
 
 var clickHandler = function (event) {
     // event.preventDefault();
@@ -81,8 +69,7 @@ var clickHandler = function (event) {
     // Start Area Was Clicked
     if (targetEl.matches("#begin")) {
         console.log("Start was clicked.");
-        countdown();
-        startQuiz();
+        quiz();
     } else if (targetEl.matches("#answer")) {
         console.log("Answer was clicked.");
     } 
@@ -93,6 +80,11 @@ var initial = function () {
     Length.innerHTML = "";
     Length.innerHTML = questions.length;
 };
+
+var quiz = function () {
+    countdown();
+    load(questionNumber);
+}
 
 answerContentEl.addEventListener("click", clickHandler);
 
