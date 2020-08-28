@@ -1,18 +1,18 @@
 // Initial Click Area
 var answerContentEl = document.querySelector("#answer");
 var timerEl = document.getElementById("time")
-var timeLeft = 30;
+var timeRemaining = 30;
 var score = 0;
 var expired = false;
 var questionNumber = 0;
 
 // Questions Array
 var questions = [
-    { q: "Commonly used data types do NOT include:", ca: "Alerts" },
-    { q: "The condition of an if/ else statement is enclosed with __________:", ca: "Parentheses" },
-    { q: "Arrays is Javascript can be used to store:", ca: "All of the above" },
-    { q: "String values must be enclosed within _______ when being assigned to variables:", ca: "Quotes" },
-    { q: "A very useful tool used during development & debugging for printing content to the debugger is:", ca: "Console.log" },
+    { q: "Commonly used data types do NOT include:", ca: "a3" },
+    { q: "The condition of an if/ else statement is enclosed with __________:", ca: "a3" },
+    { q: "Arrays is Javascript can be used to store:", ca: "a4" },
+    { q: "String values must be enclosed within _______ when being assigned to variables:", ca: "a3" },
+    { q: "A very useful tool used during development & debugging for printing content to the debugger is:", ca: "a4" },
 ];
 
 // Answers Array
@@ -28,11 +28,11 @@ var answers = [
 var countdown = function() {
     console.log("countdown!");
     var timer = setInterval(function(){
-        timeLeft = timeLeft - 1;
-        timerEl.textContent = timeLeft;
-        if(timeLeft <= 0) {
+        timeRemaining = timeRemaining - 1;
+        timerEl.textContent = timeRemaining;
+        if(timeRemaining <= 0) {
             clearInterval(timer);
-            timeLeft = 0;
+            timeRemaining = 0;
             var expired = true;
             alert("end");
         }
@@ -40,12 +40,10 @@ var countdown = function() {
 }  
 
 var load = function (questionNumber) {
-        console.log("Question: questionNumber");
+        console.log("Question: " + questionNumber);
         var Question = document.getElementById("questionLine");
         var Answer = document.getElementById("answer");
-        var Time = document.getElementById("timer");
         var answerEl = document.createElement("div");
-        var selection = false;
     
         // Load Questions
         Question.innerHTML = "";
@@ -54,9 +52,16 @@ var load = function (questionNumber) {
         // Load Answers
         Answer.innerHTML = "";
         answerEl.className = "answerList";
-        answerEl.innerHTML = "<h3 class='answerText'>" + answers[questionNumber].a1 + "</h3>" + "<h3 class='answerText'>" + answers[questionNumber].a2 + "</h3>" + "<h3 class='answerText'>" + answers[questionNumber].a3 + "</h3>" + "<h3 class='answerText'>" + answers[questionNumber].a4 + "</h3>";
+        answerEl.innerHTML = "<h3 class='answerText' id='a1'>" + answers[questionNumber].a1 + "</h3>" + "<h3 class='answerText' id='a2'>" + answers[questionNumber].a2 + "</h3>" + "<h3 class='answerText' id='a3'>" + answers[questionNumber].a3 + "</h3>" + "<h3 class='answerText' id='a4'>" + answers[questionNumber].a4 + "</h3>";
         Answer.appendChild(answerEl);
 
+        // Increment Question Number
+        questionNumber = questionNumber + 1;
+        console.log(questionNumber);
+
+        // Broadcast Correct Answer
+        correctAnswer = questions[questionNumber].ca;
+        console.log("Correct Answer: " + correctAnswer);
       };
 
 
@@ -66,13 +71,17 @@ var clickHandler = function (event) {
     var targetEl = event.target;
     console.log(targetEl);
 
-    // Start Area Was Clicked
-    if (targetEl.matches("#begin")) {
+    if (targetEl.matches("#begin")) {   // Start Button Clicked
         console.log("Start was clicked.");
         quiz();
-    } else if (targetEl.matches("#answer")) {
-        console.log("Answer was clicked.");
-    } 
+    } else if (targetEl.matches("#answer")) {   // Outside Content Window Clicked
+        console.log("Outside was clicked.");
+    } else if (targetEl.matches(".answerText")) {   // An Answer Clicked
+        console.log("A selection has been made. " + event.target.id);
+        if (event.target.id === correctAnswer) {
+            console.log("Holy Shit, The Correct Answer Was Clicked..");
+        }
+    }
 };
 
 var initial = function () {
@@ -82,8 +91,11 @@ var initial = function () {
 };
 
 var quiz = function () {
-    countdown();
-    load(questionNumber);
+    if (questionNumber <= questions.length) {
+        countdown();
+        load(questionNumber);
+
+    }
 }
 
 answerContentEl.addEventListener("click", clickHandler);
