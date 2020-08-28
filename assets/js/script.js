@@ -1,7 +1,9 @@
 // Initial Click Area
 var answerContentEl = document.querySelector("#answer");
+var timerEl = document.getElementById("time")
+var timeLeft = 30;
 var score = 0;
-
+var expired = false;
 
 // Questions Array
 var questions = [
@@ -14,24 +16,37 @@ var questions = [
 
 // Answers Array
 var answers = [
-    { 1: "Strings", 2: "Booleans", 3: "Alerts", 4: "Numbers" },
-    { 1: "Quotes", 2: "Curly Brackets", 3: "Parentheses", 4: "Square Brackets" },
-    { 1: "Numbers & Strings", 2: "Other Arrays", 3: "Booleans", 4: "All of the above" },
-    { 1: "Commas", 2: "Curly Brackets", 3: "Quotes", 4: "Parentheses" },
-    { 1: "Javascript", 2: "Terminal/Bash", 3: "For Loops", 4: "Console.log" },
+    { a1: "Strings", a2: "Booleans", a3: "Alerts", a4: "Numbers" },
+    { a1: "Quotes", a2: "Curly Brackets", a3: "Parentheses", a4: "Square Brackets" },
+    { a1: "Numbers & Strings", a2: "Other Arrays", a3: "Booleans", a4: "All of the above" },
+    { a1: "Commas", a2: "Curly Brackets", a3: "Quotes", a4: "Parentheses" },
+    { a1: "Javascript", a2: "Terminal/Bash", a3: "For Loops", a4: "Console.log" },
 ];
 
-var startQuiz = function () {
+// Countdown Timer
+var countdown = function() {
+    console.log("countdown!");
+    var timer = setInterval(function(){
+        timeLeft = timeLeft - 1;
+        timerEl.textContent = timeLeft;
+        if(timeLeft <= 0) {
+            clearInterval(timer);
+            timeLeft = 0;
+            var expired = true;
+            alert("end");
+        }
+    }, 1000);
+}  
 
+var startQuiz = function () {
       // Loop over every question object
       for (var i = 0; i < questions.length; i++) {
-
-
         console.log("Question: " + i);
         var Question = document.getElementById("questionLine");
         var Answer = document.getElementById("answer");
+        var Time = document.getElementById("timer");
         var answerEl = document.createElement("div");
-        var qnum = 1;
+        var selection = false;
     
         // Load Questions
         Question.innerHTML = "";
@@ -40,14 +55,13 @@ var startQuiz = function () {
         // Load Answers
         Answer.innerHTML = "";
         answerEl.className = "answerList";
-        answerEl.innerHTML = "<h3 class='answerText'>" + questions[i].ca + "</h3>";
-        document.getElementById("answer").appendChild(answerEl);
-
-
+        answerEl.innerHTML = "<h3 class='answerText' id='answers[i].a1'>" + answers[i].a1 + "</h3>" + "<h3 class='answerText' id='answers[i].a2'>" + answers[i].a2 + "</h3>" + "<h3 class='answerText' id='answers[i].a3'>" + answers[i].a3 + "</h3>" + "<h3 class='answerText' id='answers[i].a4'>" + answers[i].a4 + "</h3>";
+        Answer.appendChild(answerEl);
+        confirm("test");
         // Compare answers
         if (
-          (answer === true && questions[i].a === 't') ||
-          (answer === false && questions[i].a === 'f')
+          ((answer === true && questions[i].a === 't') ||
+          (answer === false && questions[i].a === 'f'))
         ) {
           // Increase score
           score++;
@@ -67,10 +81,19 @@ var clickHandler = function (event) {
     // Start Area Was Clicked
     if (targetEl.matches("#begin")) {
         console.log("Start was clicked.");
+        countdown();
         startQuiz();
     } else if (targetEl.matches("#answer")) {
         console.log("Answer was clicked.");
-    }
+    } 
+};
+
+var initial = function () {
+    var Length = document.getElementById("length");
+    Length.innerHTML = "";
+    Length.innerHTML = questions.length;
 };
 
 answerContentEl.addEventListener("click", clickHandler);
+
+initial();
