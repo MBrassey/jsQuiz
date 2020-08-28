@@ -40,6 +40,9 @@ var countdown = function () {
 
 // Load Question & Answers
 var load = function (questionNumber) {
+    // Reset Timer
+    timeRemaining = 30;
+
     console.log("Question: " + questionNumber);
     var Question = document.getElementById("questionLine");
     var Answer = document.getElementById("answer");
@@ -67,9 +70,6 @@ var load = function (questionNumber) {
         "</h3>";
     Answer.appendChild(answerEl);
 
-    // Start Timer
-    countdown();
-
     // Broadcast Correct Answer
     correctAnswer = questions[questionNumber].ca;
     console.log("Correct Answer: " + correctAnswer);
@@ -84,6 +84,9 @@ var clickHandler = function (event) {
     if (targetEl.matches("#begin")) {
         // Start Button Clicked
         console.log("Start was clicked.");
+        // Start Timer
+        countdown();
+        // Start Quiz
         quiz();
     } else if (targetEl.matches("#answer")) {
         // Outside Content Window Clicked
