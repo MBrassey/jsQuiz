@@ -40,9 +40,6 @@ var countdown = function () {
             var expired = true;
             alert("countdown ended");
         }
-        else if (questionNumber > questions.length) {
-            clearInterval(timer);
-        }
     }, 1000);
 };
 
@@ -122,6 +119,11 @@ var initial = function () {
     var Length = document.getElementById("length");
     Length.innerHTML = "";
     Length.innerHTML = questions.length;
+    var initialTime = document.getElementById("initialTime");
+    initialTime.innerHTML = "";
+    initialTime.innerHTML = 30; // Set The Initial Time Here
+    timerEl.innerHTML = "";
+    timerEl.innerHTML = 30; // Set The Initial Time Here
 };
 
 // End Quiz
@@ -132,6 +134,9 @@ var end = function () {
     Answer.innerHTML = "";
     Answer.innerHTML = "<h1 id='high'>MLAB | " + score + "</h1>";
     alert("END, Your Score: " + score);
+    timerEl.innerHTML = "";
+    timerEl.innerHTML = 30; // Set The Initial Time Here
+    clearInterval(timer);
 }
 
 // Reset Quiz
