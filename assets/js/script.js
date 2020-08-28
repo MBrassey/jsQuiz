@@ -14,6 +14,7 @@ var questionNumber = 0;
 var highScore = 0;
 var timer = "";
 toggleResult = "";
+ended = false;
 
 // Questions Array
 var questions = [
@@ -39,9 +40,11 @@ var countdown = function () {
     var timer = setInterval(function () {
         timeRemaining = timeRemaining - 1;
         timerEl.textContent = timeRemaining;
-        if (timeRemaining <= 0) {
+        if (timeRemaining <= 0 || ended) {
             clearInterval(timer);
             timeRemaining = 0;
+            timerEl.innerHTML = "";
+            timerEl.innerHTML = 30; // Set The Initial Time Here
             var expired = true;
             alert("countdown ended");
         }
@@ -145,6 +148,8 @@ var clickHandler = function (event) {
             // Incorrect Answer Clicked
             incorrect();
         }
+    } else if (targetEl.matches("#result")) {
+        console.log("RETAKE!");
     }
 };
 
@@ -160,7 +165,8 @@ var initial = function () {
 
 // End Quiz
 var end = function () {
-    Result.innerHTML = "<h2>Retake</h2>";
+    ended = true;
+    Result.innerHTML = "<h2><p>Retake</p></h2>";
     questionNumber = 0;
     Question.innerHTML = "";
     Question.innerHTML = "<h2>Current high score: <span class='azure' id='length'>" + highScore + "</span>, you'r score: <span class='azure'>" + score + "</span>.</h2>";

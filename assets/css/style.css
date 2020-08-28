@@ -141,6 +141,18 @@ button[disabled] {
     color: var(--Azure);
 }
 
+#result {
+    cursor: pointer;
+}
+
+#result p::before {
+    content: "↻ ";
+}
+
+#result:hover {
+    color: var(--Azure);
+}
+
 #begin {
     color: var(--Zinc);
     display: block;
