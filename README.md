@@ -8,7 +8,7 @@ Javascript Quiz Concept
 - [x] [High Score Persistence](https://github.com/luc1dLife/jsquiz/issues/5)
 - [x] [Stylize](https://github.com/luc1dLife/jsquiz/issues/6)
 - [x] [Bugfix & Final Changes](https://github.com/luc1dLife/jsquiz/issues/7)
-<h6><p align="right">[ Click the below image to view the <a href="https://luc1dlife.github.io/jsquiz/">webapplication</a> ]</p></h6>
-<a href="https://luc1dlife.github.io/jsquiz/">
+<h6><p align="right">[ Click the below image to view the <a href="https://luc1dlife.github.io/jsQuiz/">webapplication</a> ]</p></h6>
+<a href="https://luc1dlife.github.io/jsQuiz/">
   <img src="https://raw.githubusercontent.com/luc1dLife/jsquiz/master/assets/img/Preview.png" alt="Web App Screeshot">
 </a>

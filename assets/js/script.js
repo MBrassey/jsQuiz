@@ -1,21 +1,26 @@
 // Define The Vars
 var answerContentEl = document.querySelector("#answer");
+var Result = document.getElementById("result");
 var timerEl = document.getElementById("time");
 var Question = document.getElementById("questionLine");
 var Answer = document.getElementById("answer");
 var answerEl = document.createElement("div");
+var initialTime = document.getElementById("initialTime");
+var Length = document.getElementById("length");
 var timeRemaining = 30;
 var score = 0;
 var expired = false;
 var questionNumber = 0;
 var highScore = 0;
+var timer = "";
+toggleResult = "";
 
 // Questions Array
 var questions = [
     { q: "Commonly used data types do NOT include:", ca: "a3" },
-    { q: "The condition of an if/ else statement is enclosed with __________:", ca: "a3" },
+    { q: "The condition of an if/ else statement is enclosed with:", ca: "a3" },
     { q: "Arrays is Javascript can be used to store:", ca: "a4" },
-    { q: "String values must be enclosed within _______ when being assigned to variables:", ca: "a3" },
+    { q: "String values must be enclosed within what when being assigned to variables?", ca: "a3" },
     { q: "A very useful tool used during development & debugging for printing content to the debugger is:", ca: "a4" },
 ];
 
@@ -30,7 +35,7 @@ var answers = [
 
 // Countdown Timer
 var countdown = function () {
-    console.log("countdown!");
+    console.log("Countdown Initiated!");
     var timer = setInterval(function () {
         timeRemaining = timeRemaining - 1;
         timerEl.textContent = timeRemaining;
@@ -43,11 +48,53 @@ var countdown = function () {
     }, 1000);
 };
 
+// Handle Next
+var next = function () {
+    // Increment Question Number
+    questionNumber = questionNumber + 1;
+    
+    // To The Next Step
+    if (questionNumber < questions.length) {
+        quiz();
+    } else {
+        end();
+    }
+}
+
+// Correct Answer Handler
+var correct = function () {
+console.log("Correct!");
+// Add Current Time Remaining To Score As Points
+score = score + timeRemaining;
+console.log("New Score: " + score);
+// Display Result: Correct During load()
+toggleResult = "correct";
+next();
+}
+
+// Incorrect Answer Handler
+var incorrect = function () {
+console.log("Incorrect!");
+// Display Result: Incorrect During load()
+toggleResult = "incorrect";
+next();
+}
+
 // Load Question & Answers
 var load = function (questionNumber) {
     // Reset Timer
     timeRemaining = 30;
-    console.log("Question: " + questionNumber);
+
+    // Show Result
+    if (toggleResult === "correct") {
+        Result.innerHTML = "";
+        Result.innerHTML = "<h2>Correct!</h2>";
+    } else if (toggleResult === "incorrect") {
+        Result.innerHTML = "";
+        Result.innerHTML = "<h2>Incorrect!</h2>";
+    } else {
+        Result.innerHTML = "";
+    }
 
     // Load Questions
     Question.innerHTML = "";
@@ -73,15 +120,12 @@ var load = function (questionNumber) {
 
     // Broadcast Correct Answer
     correctAnswer = questions[questionNumber].ca;
-    console.log("Correct Answer: " + correctAnswer);
 };
 
 // Click Handler
 var clickHandler = function (event) {
     // event.preventDefault();
     var targetEl = event.target;
-    console.log(targetEl);
-
     if (targetEl.matches("#begin")) {
         // Start Button Clicked
         console.log("Start was clicked.");
@@ -93,33 +137,21 @@ var clickHandler = function (event) {
         // Outside Content Window Clicked
         console.log("Outside was clicked.");
     } else if (targetEl.matches(".answerText")) {
-        // An Answer Clicked
-        console.log("A selection has been made. " + event.target.id);
+        // A Selection Has Been Made
         if (event.target.id === correctAnswer) {
             // The Correct Answer Clicked
-            console.log("Holy Shit, The Correct Answer Was Clicked..");
-            // Add Current Time Remaining To Score As Points
-            score = score + timeRemaining;
-            console.log("New Score: " + score);
-        }
-        // Increment Question Number
-        questionNumber = questionNumber + 1;
-        // To The Next Step
-        if (questionNumber < questions.length) {
-            quiz();
+            correct();
         } else {
-            reset();
-            end();
+            // Incorrect Answer Clicked
+            incorrect();
         }
     }
 };
 
 // Initial Function
 var initial = function () {
-    var Length = document.getElementById("length");
     Length.innerHTML = "";
     Length.innerHTML = questions.length;
-    var initialTime = document.getElementById("initialTime");
     initialTime.innerHTML = "";
     initialTime.innerHTML = 30; // Set The Initial Time Here
     timerEl.innerHTML = "";
@@ -128,15 +160,12 @@ var initial = function () {
 
 // End Quiz
 var end = function () {
+    Result.innerHTML = "<h2>Retake</h2>";
     questionNumber = 0;
     Question.innerHTML = "";
     Question.innerHTML = "<h2>Current high score: <span class='azure' id='length'>" + highScore + "</span>, you'r score: <span class='azure'>" + score + "</span>.</h2>";
     Answer.innerHTML = "";
     Answer.innerHTML = "<h1 id='high'>MLAB | " + score + "</h1>";
-    alert("END, Your Score: " + score);
-    timerEl.innerHTML = "";
-    timerEl.innerHTML = 30; // Set The Initial Time Here
-    clearInterval(timer);
 }
 
 // Reset Quiz
@@ -149,8 +178,8 @@ var reset = function () {
 
 // Quiz Function
 var quiz = function () {
-    console.log("qnumber " + questionNumber);
     if (questionNumber <= questions.length) {
+        clearInterval(timer);
         load(questionNumber);
     }
 };
