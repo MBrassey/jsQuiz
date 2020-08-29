@@ -140,7 +140,7 @@ var clickHandler = function (event) {
         // Start Quiz
         quiz();
     } else if (targetEl.matches("#answer")) {
-        // Outside Content Window Clicked
+        // Outside Content Window 
         console.log("Outside was clicked.");
     } else if (targetEl.matches(".answerText")) {
         // A Selection Has Been Made
@@ -166,23 +166,26 @@ var initial = function () {
     timerEl.innerHTML = 30; // Set The Initial Time Here
 };
 
-// Process Score
-var userScore = function () {
-    // Establish Saved Scores Object
-    var savedScores = {
-        name: document.querySelector("input[name='user-score']").value,
-        score: score
+// Process & Save Score
+var saveScore = function () {
+    // Establish Saved Scores Object If High Score
+    var userScore = {
+        name: prompt("New High Score! Enter your Initials and press OK."),
+        score: score   
     }
-
-    // Push User's Score & Initials To Localstorage Sorted()
-    highScores.push(playerScore);
-    highScores.sort((a, b) => (a.score < b.score) ? 1 : -1);
-    localStorage.setItem("highScores", JSON.stringify(highScores));
+        // Push User's Score & Initials To Localstorage Sorted()
+        highScores.push(userScore);
+        highScores.sort((a, b) => (a.score < b.score) ? 1 : -1);
+        localStorage.setItem("highScores", JSON.stringify(highScores)); 
 }
 
 // End Quiz / Start Scoreboard
 var end = function () {
     ended = true;
+    if (score > highScores[0].score) {
+        console.log("New High Score!");
+    saveScore();
+    }
     Result.innerHTML = "<h2><p>Retake</p></h2>";
     questionNumber = 0;
     Question.innerHTML = "";
