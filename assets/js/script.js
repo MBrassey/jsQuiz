@@ -9,12 +9,12 @@ var initialTime = document.getElementById("initialTime");
 var Length = document.getElementById("length");
 var timeRemaining = 30;
 var score = 0;
-var expired = false;
 var questionNumber = 0;
 var highScore = 0;
 var timer = "";
 toggleResult = "";
 ended = false;
+timeOut = false;
 
 // Questions Array
 var questions = [
@@ -42,11 +42,13 @@ var countdown = function () {
         timerEl.textContent = timeRemaining;
         if (timeRemaining <= 0 || ended) {
             clearInterval(timer);
-            timeRemaining = 0;
             timerEl.innerHTML = "";
             timerEl.innerHTML = 30; // Set The Initial Time Here
-            var expired = true;
-            alert("countdown ended");
+            end();
+            if (timeRemaining <= 0) {
+                alert("Times Up!");
+                timeOut = true; // Broadcast Timeout Occured
+            }
         }
     }, 1000);
 };
@@ -163,7 +165,7 @@ var initial = function () {
     timerEl.innerHTML = 30; // Set The Initial Time Here
 };
 
-// End Quiz
+// End Quiz / Start Scoreboard
 var end = function () {
     ended = true;
     Result.innerHTML = "<h2><p>Retake</p></h2>";
