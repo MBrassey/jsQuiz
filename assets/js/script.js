@@ -1,4 +1,5 @@
 // Define The Vars
+var highScores = JSON.parse(localStorage.getItem("highScores") || '[{"name": "Luc1d","score": 111},{"name": "Angel","score": 98},{"name": "Pearl", "score": 77}]');
 var answerContentEl = document.querySelector("#answer");
 var Result = document.getElementById("result");
 var timerEl = document.getElementById("time");
@@ -165,15 +166,29 @@ var initial = function () {
     timerEl.innerHTML = 30; // Set The Initial Time Here
 };
 
+// Process Score
+var userScore = function () {
+    // Establish Saved Scores Object
+    var savedScores = {
+        name: document.querySelector("input[name='user-score']").value,
+        score: score
+    }
+
+    // Push User's Score & Initials To Localstorage Sorted()
+    highScores.push(playerScore);
+    highScores.sort((a, b) => (a.score < b.score) ? 1 : -1);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+}
+
 // End Quiz / Start Scoreboard
 var end = function () {
     ended = true;
     Result.innerHTML = "<h2><p>Retake</p></h2>";
     questionNumber = 0;
     Question.innerHTML = "";
-    Question.innerHTML = "<h2>Current high score: <span class='azure' id='length'>" + highScore + "</span>, you'r score: <span class='azure'>" + score + "</span>.</h2>";
+    Question.innerHTML = "<h2>Current high score: <span class='azure' id='length'>" + highScores[0].score + "</span>, you'r score: <span class='azure'>" + score + "</span>.</h2>";
     Answer.innerHTML = "";
-    Answer.innerHTML = "<h1 id='high'>MLAB | " + score + "</h1>";
+    Answer.innerHTML = "<h1 class='high'>" + highScores[0].name + " | " + highScores[0].score + "</h1><h1 class='high2'>" + highScores[1].name + " | " + highScores[1].score + "</h1><h1 class='high2'>" + highScores[2].name + " | " + highScores[2].score + "</h1>";
 }
 
 // Reset Quiz

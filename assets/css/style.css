@@ -141,6 +141,22 @@ button[disabled] {
     color: var(--Azure);
 }
 
+.high {
+    color: var(--Zinc);
+    display: block;
+    padding: 1vw 1vw 1vw 1vw;
+    margin: 3% 3% 3% 3%;
+    font-size: 4rem;
+}
+
+.high2 {
+    color: var(--Stone);
+    display: block;
+    padding: 1vw 1vw 1vw 1vw;
+    margin: 3% 3% 3% 3%;
+    font-size: 4rem;
+}
+
 #result {
     cursor: pointer;
 }
@@ -159,14 +175,6 @@ button[disabled] {
     padding: 1vw 1vw 1vw 1vw;
     margin: 20.3% 12% 12% 12%;
     cursor: pointer;
-}
-
-#high {
-    color: var(--Zinc);
-    display: block;
-    padding: 1vw 1vw 1vw 1vw;
-    margin: 20.3% 12% 12% 12%;
-    font-size: 4rem;
 }
 
 #begin:hover {
@@ -213,7 +221,7 @@ button[disabled] {
         font-size: 1rem;
     }
 
-    #high {
+    .high, .high2 {
         font-size: 1.5rem;
     }
 }
