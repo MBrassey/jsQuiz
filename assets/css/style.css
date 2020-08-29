@@ -221,7 +221,8 @@ button[disabled] {
         font-size: 1rem;
     }
 
-    .high, .high2 {
+    .high,
+    .high2 {
         font-size: 1.5rem;
     }
 }

@@ -1,6 +1,7 @@
 // Define The Vars
 var highScores = JSON.parse(localStorage.getItem("highScores") || '[{"name": "Luc1d","score": 111},{"name": "Angel","score": 98},{"name": "Pearl", "score": 77}]');
 var answerContentEl = document.querySelector("#answer");
+var resultContentEl = document.querySelector("#result");
 var Result = document.getElementById("result");
 var timerEl = document.getElementById("time");
 var Question = document.getElementById("questionLine");
@@ -58,33 +59,33 @@ var countdown = function () {
 var next = function () {
     // Increment Question Number
     questionNumber = questionNumber + 1;
-    
+
     // To The Next Step
     if (questionNumber < questions.length) {
         quiz();
     } else {
         end();
     }
-}
+};
 
 // Correct Answer Handler
 var correct = function () {
-console.log("Correct!");
-// Add Current Time Remaining To Score As Points
-score = score + timeRemaining;
-console.log("New Score: " + score);
-// Display Result: Correct During load()
-toggleResult = "correct";
-next();
-}
+    console.log("Correct!");
+    // Add Current Time Remaining To Score As Points
+    score = score + timeRemaining;
+    console.log("New Score: " + score);
+    // Display Result: Correct During load()
+    toggleResult = "correct";
+    next();
+};
 
 // Incorrect Answer Handler
 var incorrect = function () {
-console.log("Incorrect!");
-// Display Result: Incorrect During load()
-toggleResult = "incorrect";
-next();
-}
+    console.log("Incorrect!");
+    // Display Result: Incorrect During load()
+    toggleResult = "incorrect";
+    next();
+};
 
 // Load Question & Answers
 var load = function (questionNumber) {
@@ -140,7 +141,7 @@ var clickHandler = function (event) {
         // Start Quiz
         quiz();
     } else if (targetEl.matches("#answer")) {
-        // Outside Content Window 
+        // Outside Content Window
         console.log("Outside was clicked.");
     } else if (targetEl.matches(".answerText")) {
         // A Selection Has Been Made
@@ -171,31 +172,49 @@ var saveScore = function () {
     // Establish Saved Scores Object If High Score
     var userScore = {
         name: prompt("New High Score! Enter your Initials and press OK."),
-        score: score   
-    }
-        // Push User's Score & Initials To Localstorage Sorted()
-        highScores.push(userScore);
-        highScores.sort((a, b) => (a.score < b.score) ? 1 : -1);
-        localStorage.setItem("highScores", JSON.stringify(highScores)); 
-}
+        score: score,
+    };
+    // Push User's Score & Initials To Localstorage Sorted()
+    highScores.push(userScore);
+    highScores.sort((a, b) => (a.score < b.score ? 1 : -1));
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+};
 
 // End Quiz / Start Scoreboard
 var end = function () {
     ended = true;
     if (score > highScores[0].score) {
         console.log("New High Score!");
-    saveScore();
+        saveScore();
     }
     Result.innerHTML = "<h2><p>Retake</p></h2>";
-    questionNumber = 0;
     Question.innerHTML = "";
     Question.innerHTML = "<h2>Current high score: <span class='azure' id='length'>" + highScores[0].score + "</span>, you'r score: <span class='azure'>" + score + "</span>.</h2>";
     Answer.innerHTML = "";
-    Answer.innerHTML = "<h1 class='high'>" + highScores[0].name + " | " + highScores[0].score + "</h1><h1 class='high2'>" + highScores[1].name + " | " + highScores[1].score + "</h1><h1 class='high2'>" + highScores[2].name + " | " + highScores[2].score + "</h1>";
-}
+    Answer.innerHTML =
+        "<h1 class='high'>" +
+        highScores[0].name +
+        " | " +
+        highScores[0].score +
+        "</h1><h1 class='high2'>" +
+        highScores[1].name +
+        " | " +
+        highScores[1].score +
+        "</h1><h1 class='high2'>" +
+        highScores[2].name +
+        " | " +
+        highScores[2].score +
+        "</h1>";
+};
 
 // Reset Quiz
 var reset = function () {
+    ended = false;
+    timeOut = false;
+    questionNumber = 0;
+    toggleResult = "";
+    score = 0;
+    Result.innerHTML = "";
     Question.innerHTML = "";
     Question.innerHTML = "<h2>This quiz has <span class='azure' id='length'>" + questions.length + "</span> questions, you have <span class='azure'>30s</span> to answer each.</h2>";
     Answer.innerHTML = "";
@@ -212,6 +231,7 @@ var quiz = function () {
 
 // Listen For Clicks Within The Answer Div
 answerContentEl.addEventListener("click", clickHandler);
+resultContentEl.addEventListener("click", reset);
 
 // Update Initial App Appearance
 initial();
