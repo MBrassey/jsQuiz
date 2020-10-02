@@ -4,6 +4,7 @@ Quiz concept written in pure JS/HTML/CSS.
 
 ![licensebadge](https://img.shields.io/badge/license-CC0_1.0_Universal-blue)
 
+#### Issues
 - [x] [Initital Setup](https://github.com/MBrassey/jsquiz/issues/1)
 - [x] [Question & Answer Json](https://github.com/MBrassey/jsquiz/issues/2)
 - [x] [Loop Through Questions](https://github.com/MBrassey/jsquiz/issues/3)
